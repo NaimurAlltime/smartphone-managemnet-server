@@ -1,14 +1,14 @@
 import { Schema, model } from 'mongoose';
-import { ProductModel, TProduct } from './product.interface';
+import { SmartphoneModel, TSmartphone } from './smartphone.interface';
 
-const productSchema = new Schema<TProduct, ProductModel>(
+const smartphoneSchema = new Schema<TSmartphone, SmartphoneModel>(
   {
     name: { type: String, required: [true, 'Name is required'] },
     price: { type: Number, required: [true, 'Price is required'] },
     quantity: { type: Number, required: [true, 'Quantity is required'] },
     description: { type: String, required: [true, 'Description is required'] },
     category: { type: String, required: [true, 'Category is required'] },
-    releaseDate: { type: Date, required: [true, 'Release Date is required'] },
+    releaseDate: { type: String, required: [true, 'Release Date is required'] },
     brand: { type: String, required: [true, 'Brand is required'] },
     model: { type: String, required: [true, 'Model is required'] },
     operatingSystem: {
@@ -31,4 +31,7 @@ const productSchema = new Schema<TProduct, ProductModel>(
   },
 );
 
-export const Product = model<TProduct, ProductModel>('Product', productSchema);
+export const Smartphone = model<TSmartphone, SmartphoneModel>(
+  'Smartphone',
+  smartphoneSchema,
+);

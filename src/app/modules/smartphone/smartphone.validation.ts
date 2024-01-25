@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const createProductValidationSchema = z.object({
+const createSmartphonesValidationSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }),
   price: z
     .number()
@@ -10,7 +10,7 @@ const createProductValidationSchema = z.object({
     .min(0, { message: 'Quantity must be greater than or equal to 0' }),
   description: z.string().min(1, { message: 'Description is required' }),
   category: z.string().min(1, { message: 'Category is required' }),
-  releaseDate: z.date(),
+  releaseDate: z.string().min(1, { message: 'releaseDate is required' }),
   brand: z.string().min(1, { message: 'Brand is required' }),
   model: z.string().min(1, { message: 'Model is required' }),
   operatingSystem: z
@@ -26,7 +26,7 @@ const createProductValidationSchema = z.object({
   batteryLife: z.string().min(1, { message: 'Battery Life is required' }),
 });
 
-const updateProductValidationSchema = z.object({
+const updateSmartphonesValidationSchema = z.object({
   name: z.string().min(1, { message: 'Name is required' }).nullable(),
   price: z
     .number()
@@ -41,7 +41,10 @@ const updateProductValidationSchema = z.object({
     .min(1, { message: 'Description is required' })
     .nullable(),
   category: z.string().min(1, { message: 'Category is required' }).nullable(),
-  releaseDate: z.date().nullable(),
+  releaseDate: z
+    .string()
+    .min(1, { message: 'releaseDate is required' })
+    .nullable(),
   brand: z.string().min(1, { message: 'Brand is required' }).nullable(),
   model: z.string().min(1, { message: 'Model is required' }).nullable(),
   operatingSystem: z
@@ -66,7 +69,7 @@ const updateProductValidationSchema = z.object({
     .nullable(),
 });
 
-export const productValidations = {
-  createProductValidationSchema,
-  updateProductValidationSchema,
+export const smartphoneValidations = {
+  createSmartphonesValidationSchema,
+  updateSmartphonesValidationSchema,
 };

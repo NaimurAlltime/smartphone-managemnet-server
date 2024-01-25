@@ -1,12 +1,12 @@
 import { Model } from 'mongoose';
 
-export type TProduct = {
+export type TSmartphone = {
   name: string;
   price: number;
   quantity: number;
   description: string;
   category: string;
-  releaseDate: Date;
+  releaseDate: string;
   brand: string;
   model: string;
   operatingSystem: string;
@@ -17,6 +17,6 @@ export type TProduct = {
 };
 
 // for creating static
-export interface ProductModel extends Model<TProduct> {
-  isUserExists(model: string): Promise<TProduct | null>;
+export interface SmartphoneModel extends Model<TSmartphone> {
+  isUserExists(model: string): Promise<TSmartphone | null>;
 }
