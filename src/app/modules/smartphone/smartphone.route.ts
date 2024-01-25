@@ -12,4 +12,6 @@ router.post(
   SmartphoneControllers.createSmartphone,
 );
 
+router.delete('/:id', SmartphoneControllers.deleteSmartphone);
+
 export const SmartphoneRoutes = router;
