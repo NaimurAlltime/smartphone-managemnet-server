@@ -3,6 +3,7 @@ import catchAsync from '../utils/catchAsync';
 import sendResponse from '../utils/sendResponse';
 import { TSmartphone } from './smartphone.interface';
 import { SmartphoneServices } from './smartphone.service';
+import { SmartphoneQueryParams } from './smartphone.constant';
 
 const createSmartphone = catchAsync(async (req, res) => {
   const smartphoneData: TSmartphone = req.body;
@@ -15,6 +16,19 @@ const createSmartphone = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Smartphone Created successfully',
+    data: result,
+  });
+});
+
+const getAllSmartphone = catchAsync(async (req, res) => {
+  const queryParams: SmartphoneQueryParams = req.query;
+  const result = await SmartphoneServices.getAllSmartphones(queryParams);
+
+  //send response
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Smartphones retrieved successfully',
     data: result,
   });
 });
@@ -47,6 +61,7 @@ const deleteSmartphone = catchAsync(async (req, res) => {
 
 export const SmartphoneControllers = {
   createSmartphone,
+  getAllSmartphone,
   updateSmartphone,
   deleteSmartphone,
 };

@@ -12,6 +12,8 @@ router.post(
   SmartphoneControllers.createSmartphone,
 );
 
+router.get('/', SmartphoneControllers.getAllSmartphone);
+
 router.put(
   '/:id',
   validateRequest(smartphoneValidations.updateSmartphonesValidationSchema),

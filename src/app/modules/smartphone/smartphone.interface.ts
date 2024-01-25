@@ -18,5 +18,5 @@ export type TSmartphone = {
 
 // for creating static
 export interface SmartphoneModel extends Model<TSmartphone> {
-  isUserExists(model: string): Promise<TSmartphone | null>;
+  isSmartphoneExists(name: string): Promise<TSmartphone | null>;
 }
