@@ -12,6 +12,12 @@ router.post(
   SmartphoneControllers.createSmartphone,
 );
 
+router.put(
+  '/:id',
+  validateRequest(smartphoneValidations.updateSmartphonesValidationSchema),
+  SmartphoneControllers.updateSmartphone,
+);
+
 router.delete('/:id', SmartphoneControllers.deleteSmartphone);
 
 export const SmartphoneRoutes = router;

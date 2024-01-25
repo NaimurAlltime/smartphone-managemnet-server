@@ -19,10 +19,22 @@ const createSmartphone = catchAsync(async (req, res) => {
   });
 });
 
-const deleteSmartphone = catchAsync(async (req, res) => {
-  const smartphoneId = req.params.id;
+const updateSmartphone = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await SmartphoneServices.updateSmartphoneIntoDB(id, req.body);
 
-  const result = await SmartphoneServices.deleteSmartphoneIntoDB(smartphoneId);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Smartphone updated successfully!',
+    data: result,
+  });
+});
+
+const deleteSmartphone = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const result = await SmartphoneServices.deleteSmartphoneIntoDB(id);
 
   //send response
   sendResponse(res, {
@@ -35,5 +47,6 @@ const deleteSmartphone = catchAsync(async (req, res) => {
 
 export const SmartphoneControllers = {
   createSmartphone,
+  updateSmartphone,
   deleteSmartphone,
 };

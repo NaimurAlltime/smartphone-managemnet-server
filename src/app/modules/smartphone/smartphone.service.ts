@@ -7,6 +7,22 @@ const createSmartphoneIntoDB = async (smartphoneData: TSmartphone) => {
   return result;
 };
 
+const updateSmartphoneIntoDB = async (
+  smartphoneID: string,
+  payload: Partial<TSmartphone>,
+) => {
+  const isValidObjectId = Types.ObjectId.isValid(smartphoneID);
+
+  if (!isValidObjectId) {
+    throw new Error('Smartphone not found!');
+  } else {
+    const result = await Smartphone.findByIdAndUpdate(smartphoneID, payload, {
+      new: true,
+    });
+    return result;
+  }
+};
+
 const deleteSmartphoneIntoDB = async (smartphoneID: string) => {
   const isValidObjectId = Types.ObjectId.isValid(smartphoneID);
 
@@ -20,5 +36,6 @@ const deleteSmartphoneIntoDB = async (smartphoneID: string) => {
 
 export const SmartphoneServices = {
   createSmartphoneIntoDB,
+  updateSmartphoneIntoDB,
   deleteSmartphoneIntoDB,
 };
