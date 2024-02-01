@@ -33,6 +33,20 @@ const getAllSmartphone = catchAsync(async (req, res) => {
   });
 });
 
+const getSingleSmartphone = catchAsync(async (req, res) => {
+  const id = req.params.id;
+
+  const result = await SmartphoneServices.getSingleSmartphoneIntoDB(id);
+
+  //send response
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Smartphones retrieved successfully',
+    data: result,
+  });
+});
+
 const updateSmartphone = catchAsync(async (req, res) => {
   const { id } = req.params;
   const result = await SmartphoneServices.updateSmartphoneIntoDB(id, req.body);
@@ -62,6 +76,7 @@ const deleteSmartphone = catchAsync(async (req, res) => {
 export const SmartphoneControllers = {
   createSmartphone,
   getAllSmartphone,
+  getSingleSmartphone,
   updateSmartphone,
   deleteSmartphone,
 };

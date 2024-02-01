@@ -14,6 +14,8 @@ router.post(
 
 router.get('/', SmartphoneControllers.getAllSmartphone);
 
+router.get('/:id', SmartphoneControllers.getSingleSmartphone);
+
 router.put(
   '/:id',
   validateRequest(smartphoneValidations.updateSmartphonesValidationSchema),

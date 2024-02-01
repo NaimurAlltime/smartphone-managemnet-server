@@ -21,6 +21,7 @@ const getAllSmartphones = async (
       minPrice,
       maxPrice,
       brand,
+      category,
       model,
       releaseDate,
       operatingSystem,
@@ -31,9 +32,9 @@ const getAllSmartphones = async (
     // Build the filter object based on query parameters
     const filter: Record<string, any> = {};
 
-    if (price) {
-      filter.price = price;
-    }
+    // if (price) {
+    //   filter.price = price;
+    // }
 
     if (minPrice !== undefined && maxPrice !== undefined) {
       filter.price = { $gte: minPrice, $lte: maxPrice };
@@ -41,6 +42,10 @@ const getAllSmartphones = async (
 
     if (brand) {
       filter.brand = brand;
+    }
+
+    if (category) {
+      filter.category = category;
     }
 
     if (model) {
@@ -80,6 +85,11 @@ const getAllSmartphones = async (
   }
 };
 
+const getSingleSmartphoneIntoDB = async (id: string) => {
+  const result = await Smartphone.findById(id);
+  return result;
+};
+
 const updateSmartphoneIntoDB = async (
   smartphoneID: string,
   payload: Partial<TSmartphone>,
@@ -110,6 +120,7 @@ const deleteSmartphoneIntoDB = async (smartphoneID: string) => {
 export const SmartphoneServices = {
   createSmartphoneIntoDB,
   getAllSmartphones,
+  getSingleSmartphoneIntoDB,
   updateSmartphoneIntoDB,
   deleteSmartphoneIntoDB,
 };

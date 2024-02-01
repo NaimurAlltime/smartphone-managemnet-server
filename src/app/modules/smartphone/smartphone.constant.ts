@@ -7,6 +7,7 @@ export type SmartphoneQueryParams = {
   minPrice?: number;
   maxPrice?: number;
   brand?: string;
+  category?: string;
   model?: string;
   releaseDate?: string;
   operatingSystem?: string;
