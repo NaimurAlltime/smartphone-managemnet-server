@@ -5,6 +5,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import notFound from './app/middlewares/notFound';
 import { AuthRoutes } from './app/modules/Auth/auth.route';
 import { SmartphoneRoutes } from './app/modules/smartphone/smartphone.route';
+import { SaleRoutes } from './app/modules/Sales/sales.route';
 
 const app: Application = express();
 
@@ -16,6 +17,7 @@ app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 app.use('/api/smartphones', SmartphoneRoutes);
 app.use('/api/auth', UserRoutes);
 app.use('/api/auth', AuthRoutes);
+app.use('/api/sales', SaleRoutes);
 
 //testing
 app.get('/', (req: Request, res: Response) => {

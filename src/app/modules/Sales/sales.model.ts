@@ -20,4 +20,4 @@ const salesSchema = new Schema<TSales>({
   },
 });
 
-export const Sales = model<TSales>('SalesModel', salesSchema);
+export const Sales = model<TSales>('Sale', salesSchema);
