@@ -25,6 +25,10 @@ const smartphoneSchema = new Schema<TSmartphone, SmartphoneModel>(
       required: [true, 'Camera Quality is required'],
     },
     batteryLife: { type: String, required: [true, 'Battery Life is required'] },
+    smartphoneImage: {
+      type: String,
+      required: [true, 'smartphoneImage Life is required'],
+    },
   },
   {
     timestamps: true,

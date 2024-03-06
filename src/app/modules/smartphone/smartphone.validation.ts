@@ -24,6 +24,9 @@ const createSmartphonesValidationSchema = z.object({
     .min(0, { message: 'Screen Size must be greater than or equal to 0' }),
   cameraQuality: z.string().min(1, { message: 'Camera Quality is required' }),
   batteryLife: z.string().min(1, { message: 'Battery Life is required' }),
+  smartphoneImage: z
+    .string()
+    .min(1, { message: 'smartphoneImage Life is required' }),
 });
 
 const updateSmartphonesValidationSchema = z.object({
@@ -67,6 +70,9 @@ const updateSmartphonesValidationSchema = z.object({
     .string()
     .min(1, { message: 'Battery Life is required' })
     .nullable(),
+  smartphoneImage: z
+    .string()
+    .min(1, { message: 'smartphoneImage Life is required' }),
 });
 
 export const smartphoneValidations = {

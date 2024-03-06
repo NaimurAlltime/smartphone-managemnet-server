@@ -14,6 +14,7 @@ export type TSmartphone = {
   screenSize: number;
   cameraQuality: string;
   batteryLife: string;
+  smartphoneImage: string;
 };
 
 // for creating static
