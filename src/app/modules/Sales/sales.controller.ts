@@ -4,7 +4,6 @@ import sendResponse from '../utils/sendResponse';
 import { TSales } from './sales.interface';
 import { SalesServices } from './sales.service';
 import { Smartphone } from '../smartphone/smartphone.model';
-import { TSmartphone } from '../smartphone/smartphone.interface';
 
 const createSale = catchAsync(async (req, res) => {
   const saleData: TSales = req.body;
@@ -13,13 +12,9 @@ const createSale = catchAsync(async (req, res) => {
 
   const result = await SalesServices.createSalesIntoDB(saleData);
   const productModel = await Smartphone.findById(smartphoneId);
-  const productQuantity = productModel ? productModel.quantity : null;
-
-  console.log(productQuantity);
-  // console.log(quantity);
+  const productQuantity = productModel ? productModel.quantity : 0;
 
   const rest = productQuantity - quantity;
-  // console.log(rest);
 
   if (productModel) {
     productModel.quantity = rest;

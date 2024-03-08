@@ -25,16 +25,20 @@ const getSalesHistoryIntoDB = async (
     } else if (timeFrame === 'yearly') {
       startDate = new Date(now.getFullYear() - 1, 0, 1);
     } else {
-      throw new Error('Invalid time frame specified');
+      // Return all sales data
+      return await Sales.find({});
     }
 
     // Query sales data from database based on the calculated start date
     const salesData: TSales[] = await Sales.find({
-      sale_date: { $gte: startDate, $lte: now },
+      sale_date: { $gte: startDate.toISOString().split('T')[0], $lte: now },
     });
 
+    if (salesData.length === 0) {
+      console.log('No sales data found for the specified time frame.');
+    }
+
     return salesData;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error retrieving sales history:', error.message);
     throw error;
