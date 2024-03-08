@@ -3,11 +3,31 @@ import catchAsync from '../utils/catchAsync';
 import sendResponse from '../utils/sendResponse';
 import { TSales } from './sales.interface';
 import { SalesServices } from './sales.service';
+import { Smartphone } from '../smartphone/smartphone.model';
+import { TSmartphone } from '../smartphone/smartphone.interface';
 
 const createSale = catchAsync(async (req, res) => {
   const saleData: TSales = req.body;
+  const { quantity }: TSales = req.body;
+  const { smartphoneId } = req.body;
 
   const result = await SalesServices.createSalesIntoDB(saleData);
+  const productModel = await Smartphone.findById(smartphoneId);
+  const productQuantity = productModel ? productModel.quantity : null;
+
+  console.log(productQuantity);
+  // console.log(quantity);
+
+  const rest = productQuantity - quantity;
+  // console.log(rest);
+
+  if (productModel) {
+    productModel.quantity = rest;
+    await productModel.save();
+  } else {
+    // handle case where productModel is not found
+    console.error('Product model not found.');
+  }
 
   //send response
   sendResponse(res, {
