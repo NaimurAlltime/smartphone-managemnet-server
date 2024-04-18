@@ -73,10 +73,24 @@ const deleteSmartphone = catchAsync(async (req, res) => {
   });
 });
 
+const deleteMultipleSmartphone = catchAsync(async (req, res) => {
+  const result = await SmartphoneServices.deleteMultipleSmartphoneFromDB(
+    req.body,
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Smartphone are deleted successfully',
+    data: result,
+  });
+});
+
 export const SmartphoneControllers = {
   createSmartphone,
   getAllSmartphone,
   getSingleSmartphone,
   updateSmartphone,
   deleteSmartphone,
+  deleteMultipleSmartphone,
 };

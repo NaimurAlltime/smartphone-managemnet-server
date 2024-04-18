@@ -24,4 +24,6 @@ router.put(
 
 router.delete('/:id', SmartphoneControllers.deleteSmartphone);
 
+router.delete('/', SmartphoneControllers.deleteMultipleSmartphone);
+
 export const SmartphoneRoutes = router;

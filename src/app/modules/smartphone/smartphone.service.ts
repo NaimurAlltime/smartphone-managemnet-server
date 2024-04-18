@@ -117,10 +117,24 @@ const deleteSmartphoneIntoDB = async (smartphoneID: string) => {
   }
 };
 
+const deleteMultipleSmartphoneFromDB = async (payload: {
+  idList: string[];
+}) => {
+  const idList = payload.idList;
+  const result = Smartphone.deleteMany({
+    _id: {
+      $in: idList,
+    },
+  });
+
+  return result;
+};
+
 export const SmartphoneServices = {
   createSmartphoneIntoDB,
   getAllSmartphones,
   getSingleSmartphoneIntoDB,
   updateSmartphoneIntoDB,
   deleteSmartphoneIntoDB,
+  deleteMultipleSmartphoneFromDB,
 };
