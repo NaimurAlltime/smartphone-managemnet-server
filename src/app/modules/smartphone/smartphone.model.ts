@@ -1,33 +1,97 @@
 import { Schema, model } from 'mongoose';
 import { SmartphoneModel, TSmartphone } from './smartphone.interface';
+import { OperatingSystems, Storage } from './smartphone.constant';
 
 const smartphoneSchema = new Schema<TSmartphone, SmartphoneModel>(
   {
-    name: { type: String, required: [true, 'Name is required'] },
-    price: { type: Number, required: [true, 'Price is required'] },
-    quantity: { type: Number, required: [true, 'Quantity is required'] },
-    description: { type: String, required: [true, 'Description is required'] },
-    category: { type: String, required: [true, 'Category is required'] },
-    releaseDate: { type: String, required: [true, 'Release Date is required'] },
-    brand: { type: String, required: [true, 'Brand is required'] },
-    model: { type: String, required: [true, 'Model is required'] },
+    name: {
+      type: String,
+      required: [true, 'Product name is required'],
+      trim: true,
+    },
+    price: {
+      type: Number,
+      required: [true, 'Product price is required'],
+      min: 0,
+    },
+    quantity: {
+      type: Number,
+      required: [true, 'Product quantity is required'],
+      min: 0,
+    },
+    releaseDate: {
+      type: String,
+      required: [true, 'Product release date is required'],
+      trim: true,
+    },
+    brand: {
+      type: String,
+      required: [true, 'Product brand name is required'],
+      trim: true,
+    },
+    model: {
+      type: String,
+      required: [true, 'Product model name is required'],
+      trim: true,
+    },
     operatingSystem: {
       type: String,
-      required: [true, 'Operating System is required'],
+      enum: OperatingSystems,
+      required: [true, 'Product model name is required'],
     },
-    storageCapacity: {
-      type: Number,
-      required: [true, 'Storage Capacity is required'],
+    storage: {
+      ROM: {
+        type: String,
+        enum: Storage,
+        required: [true, 'Product ROM size is required'],
+      },
+      RAM: {
+        type: String,
+        enum: Storage,
+        required: [true, 'Product ROM size is required'],
+      },
     },
-    screenSize: { type: Number, required: [true, 'Screen Size is required'] },
-    cameraQuality: {
+    screenSize: {
       type: String,
-      required: [true, 'Camera Quality is required'],
+      required: [true, 'Product screen size is required'],
+      trim: true,
     },
-    batteryLife: { type: String, required: [true, 'Battery Life is required'] },
+    battery: {
+      type: String,
+      required: [true, 'Product battery size is required'],
+      trim: true,
+    },
+    camera: {
+      front: {
+        type: String,
+        required: [true, 'Product front camera is required'],
+        trim: true,
+      },
+      back: {
+        type: String,
+        required: [true, 'Product back camera is required'],
+        trim: true,
+      },
+    },
+    processor: {
+      type: {
+        type: String,
+        required: [true, 'Processor type is required'],
+        trim: true,
+      },
+      speed: {
+        type: String,
+        required: [true, 'Processor speed is required'],
+        trim: true,
+      },
+    },
+    details: {
+      type: String,
+      required: [true, 'Product details is required'],
+      trim: true,
+    },
     smartphoneImage: {
       type: String,
-      required: [true, 'smartphoneImage Life is required'],
     },
   },
   {

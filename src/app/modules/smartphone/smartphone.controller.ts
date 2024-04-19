@@ -21,14 +21,25 @@ const createSmartphone = catchAsync(async (req, res) => {
 });
 
 const getAllSmartphone = catchAsync(async (req, res) => {
-  const queryParams: SmartphoneQueryParams = req.query;
-  const result = await SmartphoneServices.getAllSmartphones(queryParams);
+  // const queryParams: SmartphoneQueryParams = req.query;
+  const result = await SmartphoneServices.getAllSmartphones();
 
   //send response
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Smartphones retrieved successfully',
+    data: result,
+  });
+});
+
+const getAllStockProducts = catchAsync(async (req, res) => {
+  const result = await SmartphoneServices.getAllStockProductsFromDB(req.query);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: 'Products retrieved successfully',
     data: result,
   });
 });
@@ -89,6 +100,7 @@ const deleteMultipleSmartphone = catchAsync(async (req, res) => {
 export const SmartphoneControllers = {
   createSmartphone,
   getAllSmartphone,
+  getAllStockProducts,
   getSingleSmartphone,
   updateSmartphone,
   deleteSmartphone,

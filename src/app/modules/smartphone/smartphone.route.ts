@@ -14,6 +14,8 @@ router.post(
 
 router.get('/', SmartphoneControllers.getAllSmartphone);
 
+router.get('/', SmartphoneControllers.getAllStockProducts);
+
 router.get('/:id', SmartphoneControllers.getSingleSmartphone);
 
 router.put(
