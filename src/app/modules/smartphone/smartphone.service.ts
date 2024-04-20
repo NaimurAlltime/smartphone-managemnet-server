@@ -10,81 +10,6 @@ const createSmartphoneIntoDB = async (payload: TSmartphone) => {
   return result;
 };
 
-// const getAllSmartphones = async (
-//   queryParams: SmartphoneQueryParams,
-// ): Promise<TSmartphone[]> => {
-//   try {
-//     const {
-//       sortBy,
-//       sortOrder,
-//       price,
-//       minPrice,
-//       maxPrice,
-//       brand,
-//       category,
-//       model,
-//       releaseDate,
-//       operatingSystem,
-//       storageCapacity,
-//       screenSize,
-//     } = queryParams;
-
-//     // Build the filter object based on query parameters
-//     const filter: Record<string, any> = {};
-
-//     // if (price) {
-//     //   filter.price = price;
-//     // }
-
-//     if (minPrice !== undefined && maxPrice !== undefined) {
-//       filter.price = { $gte: minPrice, $lte: maxPrice };
-//     }
-
-//     if (brand) {
-//       filter.brand = brand;
-//     }
-
-//     if (category) {
-//       filter.category = category;
-//     }
-
-//     if (model) {
-//       filter.model = model;
-//     }
-
-//     if (releaseDate) {
-//       filter.releaseDate = releaseDate;
-//     }
-
-//     if (operatingSystem) {
-//       filter.operatingSystem = operatingSystem;
-//     }
-
-//     if (storageCapacity !== undefined) {
-//       filter.storageCapacity = storageCapacity;
-//     }
-
-//     if (screenSize !== undefined) {
-//       filter.screenSize = screenSize;
-//     }
-
-//     // Build the sort object based on sortBy and sortOrder
-//     const sort: Record<string, any> = {};
-//     if (sortBy && sortOrder) {
-//       sort[sortBy] = sortOrder === 'asc' ? 1 : -1;
-//     }
-
-//     // Execute the query without pagination
-//     const smartphones: TSmartphone[] = await Smartphone.find(filter).sort(sort);
-
-//     return smartphones;
-//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//   } catch (error: any) {
-//     console.error('Error retrieving smartphones:', error.message);
-//     throw error;
-//   }
-// };
-
 const getAllSmartphones = async () => {
   const result = await Smartphone.find();
 
@@ -228,20 +153,98 @@ const getSingleSmartphoneIntoDB = async (id: string) => {
   return result;
 };
 
-const updateSmartphoneIntoDB = async (
-  smartphoneID: string,
+const updateSingleSmartphoneIntoDB = async (
+  id: string,
   payload: Partial<TSmartphone>,
 ) => {
-  const isValidObjectId = Types.ObjectId.isValid(smartphoneID);
+  const {
+    name,
+    price,
+    quantity,
+    releaseDate,
+    brand,
+    model,
+    operatingSystem,
+    storage,
+    screenSize,
+    battery,
+    camera,
+    processor,
+    details,
+    smartphoneImage,
+  } = payload;
 
-  if (!isValidObjectId) {
-    throw new AppError(httpStatus.NOT_FOUND, 'Smartphone not found!');
-  } else {
-    const result = await Smartphone.findByIdAndUpdate(smartphoneID, payload, {
-      new: true,
+  const updatedInfo: Record<string, unknown> = {};
+
+  if (storage && Object.keys(storage).length > 0) {
+    Object.entries(storage).forEach(([key, value]) => {
+      updatedInfo[`storage.${key}`] = value;
     });
-    return result;
   }
+
+  if (camera && Object.keys(camera).length > 0) {
+    Object.entries(camera).forEach(([key, value]) => {
+      updatedInfo[`camera.${key}`] = value;
+    });
+  }
+
+  if (processor && Object.keys(processor).length > 0) {
+    Object.entries(processor).forEach(([key, value]) => {
+      updatedInfo[`camera.${key}`] = value;
+    });
+  }
+
+  if (name) {
+    updatedInfo.name = name;
+  }
+
+  if (price) {
+    updatedInfo.price = price;
+  }
+
+  if (quantity) {
+    updatedInfo.quantity = quantity;
+  }
+
+  if (releaseDate) {
+    updatedInfo.releaseDate = releaseDate;
+  }
+
+  if (brand) {
+    updatedInfo.brand = brand;
+  }
+
+  if (model) {
+    updatedInfo.model = model;
+  }
+
+  if (operatingSystem) {
+    updatedInfo.operatingSystem = operatingSystem;
+  }
+
+  if (screenSize) {
+    updatedInfo.screenSize = screenSize;
+  }
+
+  if (battery) {
+    updatedInfo.battery = battery;
+  }
+
+  if (details) {
+    updatedInfo.details = details;
+  }
+
+  if (smartphoneImage) {
+    updatedInfo.productImage = smartphoneImage;
+  }
+
+  // update the productinfo
+  const result = await Smartphone.findByIdAndUpdate(id, updatedInfo, {
+    new: true,
+    runValidators: true,
+  });
+
+  return result;
 };
 
 const deleteSmartphoneIntoDB = async (smartphoneID: string) => {
@@ -273,7 +276,7 @@ export const SmartphoneServices = {
   getAllSmartphones,
   getAllStockProductsFromDB,
   getSingleSmartphoneIntoDB,
-  updateSmartphoneIntoDB,
+  updateSingleSmartphoneIntoDB,
   deleteSmartphoneIntoDB,
   deleteMultipleSmartphoneFromDB,
 };

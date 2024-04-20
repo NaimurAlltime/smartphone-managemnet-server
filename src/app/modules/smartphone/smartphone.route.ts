@@ -12,16 +12,16 @@ router.post(
   SmartphoneControllers.createSmartphone,
 );
 
-router.get('/', SmartphoneControllers.getAllSmartphone);
+// router.get('/', SmartphoneControllers.getAllSmartphone);
 
 router.get('/', SmartphoneControllers.getAllStockProducts);
 
 router.get('/:id', SmartphoneControllers.getSingleSmartphone);
 
-router.put(
-  '/:id',
+router.patch(
+  '/:productId',
   validateRequest(smartphoneValidations.updateSmartphonesValidationSchema),
-  SmartphoneControllers.updateSmartphone,
+  SmartphoneControllers.updateSingleSmartphone,
 );
 
 router.delete('/:id', SmartphoneControllers.deleteSmartphone);

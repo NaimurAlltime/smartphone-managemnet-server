@@ -58,14 +58,18 @@ const getSingleSmartphone = catchAsync(async (req, res) => {
   });
 });
 
-const updateSmartphone = catchAsync(async (req, res) => {
-  const { id } = req.params;
-  const result = await SmartphoneServices.updateSmartphoneIntoDB(id, req.body);
+const updateSingleSmartphone = catchAsync(async (req, res) => {
+  const { productId } = req.params;
+
+  const result = await SmartphoneServices.updateSingleSmartphoneIntoDB(
+    productId,
+    req.body,
+  );
 
   sendResponse(res, {
-    statusCode: httpStatus.OK,
     success: true,
-    message: 'Smartphone updated successfully!',
+    statusCode: httpStatus.OK,
+    message: 'Smartphone updated successfully',
     data: result,
   });
 });
@@ -102,7 +106,7 @@ export const SmartphoneControllers = {
   getAllSmartphone,
   getAllStockProducts,
   getSingleSmartphone,
-  updateSmartphone,
+  updateSingleSmartphone,
   deleteSmartphone,
   deleteMultipleSmartphone,
 };
