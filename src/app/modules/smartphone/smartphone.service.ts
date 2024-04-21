@@ -1,9 +1,6 @@
 import { Types } from 'mongoose';
 import { TSmartphone } from './smartphone.interface';
 import { Smartphone } from './smartphone.model';
-import { SmartphoneQueryParams } from './smartphone.constant';
-import AppError from '../../error/AppError';
-import httpStatus from 'http-status';
 
 const createSmartphoneIntoDB = async (payload: TSmartphone) => {
   const result = await Smartphone.create(payload);

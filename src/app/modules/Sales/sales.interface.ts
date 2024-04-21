@@ -1,8 +1,11 @@
 import { Types } from 'mongoose';
 
-export type TSales = {
-  smartphone: Types.ObjectId;
-  buyer_name: string;
+export interface TSales {
+  productId?: Types.ObjectId;
+  productName: string;
+  productImage: string;
+  productPrice: number;
   quantity: number;
-  sale_date: string;
-};
+  buyerName: string;
+  saleDate: string;
+}
