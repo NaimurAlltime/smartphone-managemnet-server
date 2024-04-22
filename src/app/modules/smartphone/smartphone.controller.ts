@@ -33,8 +33,10 @@ const getAllSmartphone = catchAsync(async (req, res) => {
   });
 });
 
-const getAllStockProducts = catchAsync(async (req, res) => {
-  const result = await SmartphoneServices.getAllStockProductsFromDB(req.query);
+const getAllStockSmartphone = catchAsync(async (req, res) => {
+  const result = await SmartphoneServices.getAllStockSmartphoneFromDB(
+    req.query,
+  );
 
   sendResponse(res, {
     success: true,
@@ -104,7 +106,7 @@ const deleteMultipleSmartphone = catchAsync(async (req, res) => {
 export const SmartphoneControllers = {
   createSmartphone,
   getAllSmartphone,
-  getAllStockProducts,
+  getAllStockSmartphone,
   getSingleSmartphone,
   updateSingleSmartphone,
   deleteSmartphone,

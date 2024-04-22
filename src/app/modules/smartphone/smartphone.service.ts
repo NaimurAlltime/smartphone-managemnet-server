@@ -13,7 +13,7 @@ const getAllSmartphones = async () => {
   return result;
 };
 
-const getAllStockProductsFromDB = async (query: Record<string, unknown>) => {
+const getAllStockSmartphoneFromDB = async (query: Record<string, unknown>) => {
   // filter object
   const filterObj: Record<string, unknown> = {};
 
@@ -271,7 +271,7 @@ const deleteMultipleSmartphoneFromDB = async (payload: {
 export const SmartphoneServices = {
   createSmartphoneIntoDB,
   getAllSmartphones,
-  getAllStockProductsFromDB,
+  getAllStockSmartphoneFromDB,
   getSingleSmartphoneIntoDB,
   updateSingleSmartphoneIntoDB,
   deleteSmartphoneIntoDB,

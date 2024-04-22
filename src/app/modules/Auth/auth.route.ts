@@ -1,7 +1,5 @@
 import express from 'express';
-import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
-import { UserRoles } from '../user/user.constant';
 import { AuthControllers } from './auth.controller';
 import { AuthValidations } from './auth.validation';
 
@@ -15,7 +13,6 @@ router.post(
 
 router.post(
   '/change-password',
-  // auth(UserRoles),
   validateRequest(AuthValidations.changePasswordValidationSchema),
   AuthControllers.changePassword,
 );
