@@ -1,19 +1,15 @@
 import { Model } from 'mongoose';
-import { USER_ROLES } from './user.constant';
 
-export interface prevPassword {
-  password: string;
-  createdAt: string;
-}
+export type TUserRoles = 'super-admin' | 'branch-manager' | 'seller';
 
-export interface TUser {
-  _id?: string;
+export type TUser = {
+  fullName: string;
   username: string;
+  role: TUserRoles;
   email: string;
   password: string;
-  role?: 'user' | 'admin';
-  passwordChangeHistory: prevPassword[];
-}
+  profileImage?: string;
+};
 
 export interface UserModel extends Model<TUser> {
   isUserExistsByCustomUsername(username: string): Promise<TUser | null>;
@@ -22,5 +18,3 @@ export interface UserModel extends Model<TUser> {
     hashedPassword: string,
   ): Promise<boolean>;
 }
-
-export type TUserRole = keyof typeof USER_ROLES;

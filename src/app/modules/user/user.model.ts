@@ -1,44 +1,39 @@
 import bcrypt from 'bcrypt';
 import { model, Schema } from 'mongoose';
 import config from '../../config';
-import { prevPassword, TUser, UserModel } from './user.interface';
-
-const passwordHistorySchema = new Schema<prevPassword, UserModel>(
-  {
-    password: {
-      type: String,
-    },
-    createdAt: {
-      type: String,
-    },
-  },
-  {
-    _id: false,
-  },
-);
+import { TUser, UserModel } from './user.interface';
+import { UserRoles } from './user.constant';
 
 const userSchema = new Schema<TUser, UserModel>(
   {
+    fullName: {
+      type: String,
+      required: [true, 'Full name is required'],
+      trim: true,
+    },
     username: {
       type: String,
-      required: [true, 'User Name is required!'],
-      unique: true,
+      required: [true, 'Username is required'],
+      trim: true,
+    },
+    role: {
+      type: String,
+      enum: UserRoles,
+      required: [true, 'User role is required'],
     },
     email: {
       type: String,
-      required: [true, 'Email is required!'],
+      required: [true, 'Email is required'],
+      trim: true,
       unique: true,
     },
     password: {
       type: String,
-      required: [true, 'Password is required!'],
-      select: 0,
+      required: [true, 'Password is required'],
     },
-    role: { type: String, enum: ['user', 'admin'], default: 'user' },
-    passwordChangeHistory: {
-      type: [passwordHistorySchema],
-      select: 0,
-      default: [],
+    profileImage: {
+      type: String,
+      trim: true,
     },
   },
   {
@@ -66,9 +61,7 @@ userSchema.post('save', function (doc, next) {
 userSchema.statics.isUserExistsByCustomUsername = async function (
   username: string,
 ) {
-  return await this.findOne({ username }).select(
-    '+password +passwordChangeHistory',
-  );
+  return await this.findOne({ username }).select('+password ');
 };
 
 userSchema.statics.isPasswordMatched = async function (
