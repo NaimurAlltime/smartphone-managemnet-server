@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 export type TUserRoles = 'super-admin' | 'branch-manager' | 'seller';
 
 export type TUser = {
+  _id?: string;
   fullName: string;
   username: string;
   role: TUserRoles;
