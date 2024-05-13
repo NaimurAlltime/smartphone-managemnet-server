@@ -232,7 +232,7 @@ const updateSingleSmartphoneIntoDB = async (
   }
 
   if (smartphoneImage) {
-    updatedInfo.productImage = smartphoneImage;
+    updatedInfo.smartphoneImage = smartphoneImage;
   }
 
   // update the productinfo

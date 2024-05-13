@@ -19,41 +19,17 @@ const loginUser = catchAsync(async (req, res) => {
     data: {
       user: {
         _id: user?._id,
+        fullName: user?.fullName,
         username: user?.username,
         email: user?.email,
         role: user?.role,
+        profileImage: user?.profileImage,
       },
       token: accessToken,
     },
   });
 });
 
-const changePassword = catchAsync(async (req, res) => {
-  const { ...passwordData } = req.body;
-
-  const user = req.user;
-
-  // Check if user is defined before proceeding
-  if (!user) {
-    sendResponse(res, {
-      statusCode: httpStatus.UNAUTHORIZED,
-      success: false,
-      message: 'User not authenticated',
-      data: null,
-    });
-    return;
-  }
-
-  const result = await AuthServices.changePassword(user, passwordData);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: 'Password changed successfully',
-    data: result,
-  });
-});
-
 export const AuthControllers = {
   loginUser,
-  changePassword,
 };
