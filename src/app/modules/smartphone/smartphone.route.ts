@@ -14,8 +14,6 @@ router.post(
   SmartphoneControllers.createSmartphone,
 );
 
-// router.get('/', SmartphoneControllers.getAllSmartphone);
-
 router.get(
   '/',
   auth('super-admin', 'branch-manager', 'seller'),
