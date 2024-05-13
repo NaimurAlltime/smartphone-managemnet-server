@@ -21,7 +21,7 @@ app.use('/api/sales', SaleRoutes);
 
 //testing
 app.get('/', (req: Request, res: Response) => {
-  res.send('server in running');
+  res.send('Server is running...');
 });
 
 // notfound api
