@@ -11,7 +11,15 @@ const app: Application = express();
 
 // parser
 app.use(express.json());
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
+app.use(
+  cors({
+    origin: [
+      'https://smartphone-management-client-side.netlify.app',
+      'http://localhost:5173',
+    ],
+    credentials: true,
+  }),
+);
 
 // application routes
 app.use('/api/smartphones', SmartphoneRoutes);
