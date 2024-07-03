@@ -11,6 +11,8 @@ const app: Application = express();
 
 // parser
 app.use(express.json());
+
+//cors handle
 app.use(
   cors({
     origin: [
